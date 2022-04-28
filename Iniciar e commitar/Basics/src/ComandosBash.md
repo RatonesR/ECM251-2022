@@ -1,12 +1,12 @@
-INICIO: /n
-git clone "repositorio clonado" /n
-CNTRL + SHIFT + p /n
-create java project /n
-no build tools /n
+INICIO:  
+git clone "repositorio clonado"; 
+CNTRL + SHIFT + p; 
+create java project; 
+no build tools   |   
 
-TERMINO: /n
-git config --local user.name "RatonesR" /n
-git config --local user.email "lfrodrigues703@gmail.com" /n
-git add . /n
-git commit -m "nome do commit" /n
+TERMINO:  
+git config --local user.name "RatonesR"; 
+git config --local user.email "lfrodrigues703@gmail.com"; 
+git add .  ; 
+git commit -m "nome do commit"; 
 git push origin main  (gerar token com o "repo" assinalado)
