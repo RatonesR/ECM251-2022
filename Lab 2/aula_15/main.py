@@ -1,5 +1,5 @@
-from item import Item
-from carrinho import Carrinho
+from modelos.item import Item
+from modelos.carrinho import Carrinho
 
 item1 = Item(199, 'Dark Souls')
 item2 = Item(
