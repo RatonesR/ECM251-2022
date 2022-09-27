@@ -64,13 +64,14 @@ with login:
 
 with cadastro:
     st.title("Preencha suas Informações:")
-    if "chave" not in st.session_state:
-        st.session_state.chave = []
 
     nome = st.text_input(label="Username")
     email = st.text_input(label="Email")
     senha = st.text_input(label="Password")
     botao1 = st.button("cadastro")
+
+    if "chave" not in st.session_state:
+        st.session_state.chave = [["","",""]]
 
     if botao1:
         st.session_state.chave.append([nome, email, senha])
@@ -137,13 +138,18 @@ with teste:
     nome_login = st.text_input(label="username")
     email_login = st.text_input(label="email")
     senha_login = st.text_input(label="senha")
+    lista_login = [nome_login, email_login, senha_login]
     botao2 = st.button("Login")
+    
 
     if botao2:
         for i in st.session_state.chave:
-            for j in st.session_state.chave:
-                if nome_login == st.session_state.chave and senha_login == st.session_state.chave:
-                    st.write("deu certo")
+            lista_teste = st.session_state.chave[i]
+            if lista_teste == lista_login:
+                st.write("sucesso")
+                break
+            else:
+                st.write("deu ruim")
 
     #carrinho
     
