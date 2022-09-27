@@ -1,27 +1,31 @@
 import streamlit as st
-from models.user import User
+from controllers.user_controller import UserController as uc
 
 st.set_page_config(page_title="Rat Store", page_icon=":mouse:", layout="centered", initial_sidebar_state="collapsed", menu_items=None)
 
-login, cadastro, loja, carrinho, perfil = st.tabs(["login", "cadastro", "loja", "carrinho", "perfil"])
+login, cadastro, loja, carrinho = st.tabs(["login", "cadastro", "loja", "carrinho"])
 
 payment = ["PayPal", "Boleto Bancario", "PIX", "Visa", "Mastercard", "Diner's Club"]
 
 SeusItens = []
-
-Usuarios = []
-Usuarios_login = []
+Usuario_nome = ["Luiz", "opa"]
+Usuario_email = ["Luiz@gmail.com", "opa@opa"]
+Usuario_senha = ["Luiz", "opa"]
 
 with st.sidebar:
-        st.sidebar.title("CARRINHO")
-        with st.expander("itens"):
-            st.write("seus itens")   #implementar
-        total_compra = st.metric(label="total da compra:", value=0)   #implementar
-        option = st.selectbox(label="forma de pagamento:", options=payment)
-        finalizar_compra = st.button(label="finalizar compra")    #implementar
+    st.sidebar.title("PERFIL")
+    col1, col2, col3 = st.columns(3)
+    with col2:
+        st.image("https://cdn-icons-png.flaticon.com/512/616/616569.png", caption="imagem de perfil", width=100)
+    st.write("Nome: ", Usuario_nome[0])
+    st.write("Email: ", Usuario_email[0])
+    log_out = st.button(label="logout")
 
-        if finalizar_compra:
-            st.write("compra finalizada!")
+    if log_out:
+        del(Usuario_nome[0])
+        del(Usuario_email[0])
+        del(Usuario_senha[0])
+        st.write("Logged out!")
 
 with login:
     st.title("**WELCOME TRAVELER**")
@@ -33,9 +37,12 @@ with login:
         input_button_submit = st.form_submit_button("Login")
 
         if input_button_submit:
-            st.write("Login completo")
+            if uc.checkLogin(input_name, input_password, None):
+                st.write("Login successful!")
+            else:
+                st.write("Incorrect username or password")
         else:
-            st.write("Incorrect username or password")
+            st.write("Press to submit")
 
 with cadastro:
     st.title("Preencha suas Informações:")
@@ -46,13 +53,7 @@ with cadastro:
         input_button_submit = st.form_submit_button("Cadastrar")
 
     if input_button_submit:
-        Usuarios.append([input_name, input_email, input_password])
-        Usuarios_login.append([input_name, input_password])
         st.write("Signed In!")
-
-with perfil:
-    st.title("SEU PERFIL")
-    st.markdown(input_name)
 
 with loja:
 
