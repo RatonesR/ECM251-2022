@@ -1,42 +1,58 @@
 import streamlit as st
+from models.user import User
 
 st.set_page_config(page_title="Rat Store", page_icon=":mouse:", layout="centered", initial_sidebar_state="collapsed", menu_items=None)
 
-login_cadastro, loja, carrinho, perfil = st.tabs(["login e cadastro", "loja", "carrinho", "perfil"])
+login, cadastro, loja, carrinho, perfil = st.tabs(["login", "cadastro", "loja", "carrinho", "perfil"])
 
 payment = ["PayPal", "Boleto Bancario", "PIX", "Visa", "Mastercard", "Diner's Club"]
 
 SeusItens = []
 
+Usuarios = []
+Usuarios_login = []
+
 with st.sidebar:
         st.sidebar.title("CARRINHO")
         with st.expander("itens"):
             st.write("seus itens")   #implementar
-        st.metric(label="total da compra:", value=0)   #implementar
+        total_compra = st.metric(label="total da compra:", value=0)   #implementar
         option = st.selectbox(label="forma de pagamento:", options=payment)
-        st.button(label="finalizar compra")    #implementar
+        finalizar_compra = st.button(label="finalizar compra")    #implementar
 
-with login_cadastro:
-    col1, col2, col3 = st.columns(3)
-    with col2:
-        st.title("**WELCOME TRAVELER**")
+        if finalizar_compra:
+            st.write("compra finalizada!")
 
+with login:
+    st.title("**WELCOME TRAVELER**")
 
-    st.markdown("**INFO**")
+    with st.form(key="verify_user"):
+        st.markdown("**INFO**")
+        input_name = st.text_input(label="Username")
+        input_password = st.text_input(label="Password")
+        input_button_submit = st.form_submit_button("Login")
 
-    st.text_input("Username")
-    st.text_input("Password")
+        if input_button_submit:
+            st.write("Login completo")
+        else:
+            st.write("Incorrect username or password")
 
+with cadastro:
+    st.title("Preencha suas Informações:")
+    with st.form(key="include_user"):
+        input_name = st.text_input(label="Username")
+        input_email = st.text_input(label="Email")
+        input_password = st.text_input(label="Password")
+        input_button_submit = st.form_submit_button("Cadastrar")
 
-    col1, col2, col3, col4, col5 = st.columns(5)
+    if input_button_submit:
+        Usuarios.append([input_name, input_email, input_password])
+        Usuarios_login.append([input_name, input_password])
+        st.write("Signed In!")
 
-    with col1:
-        if st.button(label="Login"):
-            st.write("login succesful!")
-
-    with col2:
-        if st.button("Cadastrar"):
-            st.write("signed in!")
+with perfil:
+    st.title("SEU PERFIL")
+    st.markdown(input_name)
 
 with loja:
 
