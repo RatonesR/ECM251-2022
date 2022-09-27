@@ -3,28 +3,46 @@ from controllers.user_controller import UserController as uc
 
 st.set_page_config(page_title="Rat Store", page_icon=":mouse:", layout="centered", initial_sidebar_state="collapsed", menu_items=None)
 
-login, cadastro, loja, carrinho = st.tabs(["login", "cadastro", "loja", "carrinho"])
+login, cadastro, loja, carrinho, teste = st.tabs(["login", "cadastro", "loja", "carrinho", "teste"])
 
 payment = ["PayPal", "Boleto Bancario", "PIX", "Visa", "Mastercard", "Diner's Club"]
 
-SeusItens = []
-Usuario_nome = ["Luiz", "opa"]
-Usuario_email = ["Luiz@gmail.com", "opa@opa"]
-Usuario_senha = ["Luiz", "opa"]
+SeusItens = ["eu"]
+SeusItens_preco = [10]
+
+precos = [
+    29.99,
+    9999.99,
+    299.99,
+    199.99,
+    4.99,
+    4499.99
+]
+
+produtos = [
+    "Aulão com Murilo",
+    "Correção de Trabalho",
+    "Pokemon Scarlet",
+    "Adiar o Projeto",
+    "Bread Simulator",
+    "PC gamer"
+]
+
+# Usuario_nome = ["Luiz", "opa"]
+# Usuario_email = ["Luiz@gmail.com", "opa@opa"]
+# Usuario_senha = ["Luiz", "opa"]
 
 with st.sidebar:
     st.sidebar.title("PERFIL")
     col1, col2, col3 = st.columns(3)
     with col2:
         st.image("https://cdn-icons-png.flaticon.com/512/616/616569.png", caption="imagem de perfil", width=100)
-    st.write("Nome: ", Usuario_nome[0])
-    st.write("Email: ", Usuario_email[0])
-    log_out = st.button(label="logout")
+    st.write("Nome: ", st.session_state.chave[-1][0])
+    st.write("Email: ", st.session_state.chave[-1][1])
+    logout = st.button(label="logout")
 
-    if log_out:
-        del(Usuario_nome[0])
-        del(Usuario_email[0])
-        del(Usuario_senha[0])
+    if logout:
+        del(st.session_state.chave[0])
         st.write("Logged out!")
 
 with login:
@@ -46,16 +64,26 @@ with login:
 
 with cadastro:
     st.title("Preencha suas Informações:")
-    with st.form(key="include_user"):
-        input_name = st.text_input(label="Username")
-        input_email = st.text_input(label="Email")
-        input_password = st.text_input(label="Password")
-        input_button_submit = st.form_submit_button("Cadastrar")
+    if "chave" not in st.session_state:
+        st.session_state.chave = []
 
-    if input_button_submit:
-        st.write("Signed In!")
+    nome = st.text_input(label="Username")
+    email = st.text_input(label="Email")
+    senha = st.text_input(label="Password")
+    botao1 = st.button("cadastro")
+
+    if botao1:
+        st.session_state.chave.append([nome, email, senha])
+        st.write("Cadastrado!")
 
 with loja:
+    st.selectbox("Buscar", options=("Aulão com Murilo",
+    "Correção de Trabalho",
+    "Pokemon Scarlet",
+    "Adiar o Projeto",
+    "Bread Simulator",
+    "PC gamer"
+    ))
 
     st.title("BEM VINDO À NOSSA LOJA")
 
@@ -75,7 +103,7 @@ with loja:
         st.image("https://styles.redditmedia.com/t5_5x8srd/styles/communityIcon_ltry6sr9afk81.png?width=256&s=34d711da385cf952b463e85ddc5d88d5f9249602")
         st.info("R$ 299,99")
 
-    st.markdown("**PROMOÇÕES**")
+    st.header("**PROMOÇÕES**")
 
     col1, col2, col3 = st.columns(3)
     with col1:
@@ -93,4 +121,38 @@ with loja:
 
 with carrinho:
     st.title("**SEUS ITENS**")
-    remover = st.selectbox(label="Remover Item", options=SeusItens)
+    col1, col2 = st.columns(2)
+    for i in range(len(SeusItens)):
+        col1.write(SeusItens[i])
+        col2.write(SeusItens_preco[i])
+    botao_remover = st.button("remover ultimo item")
+    if botao_remover:
+        SeusItens.pop[-1]
+        SeusItens_preco.pop[-1]
+
+with teste:
+    st.write("oi")
+    #login
+
+    nome_login = st.text_input(label="username")
+    email_login = st.text_input(label="email")
+    senha_login = st.text_input(label="senha")
+    botao2 = st.button("Login")
+
+    if botao2:
+        for i in st.session_state.chave:
+            for j in st.session_state.chave:
+                if nome_login == st.session_state.chave and senha_login == st.session_state.chave:
+                    st.write("deu certo")
+
+    #carrinho
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        for i in range(len(produtos)):
+            st.write(produtos[i])
+    with col2:
+        for i in range(len(produtos)):
+            st.write(precos[i])
+
+    remove = st.button("remove")
