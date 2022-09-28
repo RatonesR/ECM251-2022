@@ -1,3 +1,4 @@
+from filecmp import clear_cache
 import streamlit as st
 from controllers.user_controller import UserController as uc
 
@@ -32,18 +33,51 @@ produtos = [
 # Usuario_email = ["Luiz@gmail.com", "opa@opa"]
 # Usuario_senha = ["Luiz", "opa"]
 
-with st.sidebar:
-    st.sidebar.title("PERFIL")
-    col1, col2, col3 = st.columns(3)
-    with col2:
-        st.image("https://cdn-icons-png.flaticon.com/512/616/616569.png", caption="imagem de perfil", width=100)
-    st.write("Nome: ", st.session_state.chave[-1][0])
-    st.write("Email: ", st.session_state.chave[-1][1])
-    logout = st.button(label="logout")
 
-    if logout:
-        del(st.session_state.chave[0])
-        st.write("Logged out!")
+with teste:
+    st.write("oi")
+    #login
+
+    # nome_login = st.text_input(label="username")
+    # email_login = st.text_input(label="email")
+    # senha_login = st.text_input(label="senha")
+    # lista_login = [nome_login, email_login, senha_login]
+    # botao2 = st.button("Login")
+
+
+    # if botao2:
+    #     for i in st.session_state.chave:
+    #         lista_teste = st.session_state.chave[i]
+    #         if lista_teste == lista_login:
+    #             st.write("sucesso")
+    #             break
+    #         else:
+    #             st.write("deu ruim")
+
+
+    #comprar
+
+    # opcao = st.selectbox("Buscar", options=("Aulão com Murilo",
+    # "Correção de Trabalho",
+    # "Pokemon Scarlet",
+    # "Adiar o Projeto",
+    # "Bread Simulator",
+    # "PC gamer"
+    # ))
+
+    # if "carrinho_produto" not in st.session_state:
+    #     st.session_state.carrinho_produto = []
+    # if "carrinho_preco" not in st.session_state:
+    #     st.session_state.carrinho_preco = []
+
+    # add_cart = st.button("adicionar ao carrinho")
+
+    # if add_cart:
+    #     st.session_state.carrinho_produto.append(opcao)
+    #     st.session_state.carrinho_preco.append(precos[produtos.index(opcao)])
+
+
+
 
 with login:
     st.title("**WELCOME TRAVELER**")
@@ -71,14 +105,24 @@ with cadastro:
     botao1 = st.button("cadastro")
 
     if "chave" not in st.session_state:
-        st.session_state.chave = [["","",""]]
+        st.session_state.chave = [[" "," "," "]]
 
     if botao1:
         st.session_state.chave.append([nome, email, senha])
         st.write("Cadastrado!")
 
 with loja:
-    st.selectbox("Buscar", options=("Aulão com Murilo",
+    # st.selectbox("Buscar", options=("Aulão com Murilo",
+    # "Correção de Trabalho",
+    # "Pokemon Scarlet",
+    # "Adiar o Projeto",
+    # "Bread Simulator",
+    # "PC gamer"
+    # ))
+
+    st.title("BEM VINDO À NOSSA LOJA")
+
+    opcao = st.selectbox("Buscar", options=("Aulão com Murilo",
     "Correção de Trabalho",
     "Pokemon Scarlet",
     "Adiar o Projeto",
@@ -86,7 +130,16 @@ with loja:
     "PC gamer"
     ))
 
-    st.title("BEM VINDO À NOSSA LOJA")
+    if "carrinho_produto" not in st.session_state:
+        st.session_state.carrinho_produto = []
+    if "carrinho_preco" not in st.session_state:
+        st.session_state.carrinho_preco = []
+
+    add_cart = st.button("adicionar ao carrinho")
+
+    if add_cart:
+        st.session_state.carrinho_produto.append(opcao)
+        st.session_state.carrinho_preco.append(precos[produtos.index(opcao)])
 
     st.header("**EM ALTA**")
 
@@ -123,42 +176,33 @@ with loja:
 with carrinho:
     st.title("**SEUS ITENS**")
     col1, col2 = st.columns(2)
-    for i in range(len(SeusItens)):
-        col1.write(SeusItens[i])
-        col2.write(SeusItens_preco[i])
-    botao_remover = st.button("remover ultimo item")
+    for i in range(len(st.session_state.carrinho_produto)):
+        col1.write(st.session_state.carrinho_produto[i])
+        col2.write(st.session_state.carrinho_preco[i])
+    botao_remover = col1.button("remover", help="remove o último item do carrinho")
+
+    col1, col2, col3 = st.columns(3)
+    preco_total = col1.metric("PREÇO TOTAL:", value=sum(st.session_state.carrinho_preco))
+    forma_pagamento = col2.selectbox("selecione forma de pagamento", options=("PayPal", "Boleto Bancário", "PIX", "Crédito", "Débito"))
+    pagar_tudo = st.button("pagar")
+    if pagar_tudo:
+        st.write("você gastou dindin")
     if botao_remover:
-        SeusItens.pop[-1]
-        SeusItens_preco.pop[-1]
+        st.session_state.carrinho_produto.pop[-1]
+        st.session_state.carrinho_preco.pop[-1]
 
-with teste:
-    st.write("oi")
-    #login
-
-    nome_login = st.text_input(label="username")
-    email_login = st.text_input(label="email")
-    senha_login = st.text_input(label="senha")
-    lista_login = [nome_login, email_login, senha_login]
-    botao2 = st.button("Login")
-    
-
-    if botao2:
-        for i in st.session_state.chave:
-            lista_teste = st.session_state.chave[i]
-            if lista_teste == lista_login:
-                st.write("sucesso")
-                break
-            else:
-                st.write("deu ruim")
-
-    #carrinho
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        for i in range(len(produtos)):
-            st.write(produtos[i])
+with st.sidebar:
+    st.sidebar.title("PERFIL")
+    col1, col2, col3 = st.columns(3)
     with col2:
-        for i in range(len(produtos)):
-            st.write(precos[i])
+        st.image("https://cdn-icons-png.flaticon.com/512/616/616569.png", caption="imagem de perfil", width=100)
+    st.write("Nome: ", st.session_state.chave[-1][0])
+    st.write("Email: ", st.session_state.chave[-1][1])
+    logout = st.button(label="logout")
 
-    remove = st.button("remove")
+    if logout:
+        st.write("Logged out!")
+        clear_cache
+
+
+
