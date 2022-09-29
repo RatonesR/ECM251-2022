@@ -1,4 +1,3 @@
-from filecmp import clear_cache
 import streamlit as st
 from controllers.user_controller import UserController as uc
 
@@ -7,9 +6,6 @@ st.set_page_config(page_title="Rat Store", page_icon=":mouse:", layout="centered
 login, cadastro, loja, carrinho, teste = st.tabs(["login", "cadastro", "loja", "carrinho", "teste"])
 
 payment = ["PayPal", "Boleto Bancario", "PIX", "Visa", "Mastercard", "Diner's Club"]
-
-SeusItens = ["eu"]
-SeusItens_preco = [10]
 
 precos = [
     29.99,
@@ -202,7 +198,6 @@ with st.sidebar:
 
     if logout:
         st.write("Logged out!")
-        clear_cache
 
 
 
