@@ -1,3 +1,4 @@
+from os import write
 import streamlit as st
 from controllers.user_controller import UserController as uc
 
@@ -28,7 +29,6 @@ produtos = [
 # Usuario_nome = ["Luiz", "opa"]
 # Usuario_email = ["Luiz@gmail.com", "opa@opa"]
 # Usuario_senha = ["Luiz", "opa"]
-
 
 with teste:
     st.write("oi")
@@ -74,7 +74,6 @@ with teste:
 
 
 
-
 with login:
     st.title("**WELCOME TRAVELER**")
 
@@ -85,7 +84,7 @@ with login:
         input_button_submit = st.form_submit_button("Login")
 
         if input_button_submit:
-            if uc.checkLogin(input_name, input_password, None):
+            if input_name in st.session_state.chave:
                 st.write("Login successful!")
             else:
                 st.write("Incorrect username or password")
@@ -105,7 +104,7 @@ with cadastro:
 
     if botao1:
         st.session_state.chave.append([nome, email, senha])
-        st.write("Cadastrado!")
+        st.write("Cadastrado!")  
 
 with loja:
     # st.selectbox("Buscar", options=("Aulão com Murilo",
@@ -171,11 +170,13 @@ with loja:
 
 with carrinho:
     st.title("**SEUS ITENS**")
-    col1, col2 = st.columns(2)
+    col01, col02 = st.columns(2)
     for i in range(len(st.session_state.carrinho_produto)):
-        col1.write(st.session_state.carrinho_produto[i])
-        col2.write(st.session_state.carrinho_preco[i])
-    botao_remover = col1.button("remover", help="remove o último item do carrinho")
+        st.empty()
+        col01.write(st.session_state.carrinho_produto[i])
+        col02.write(st.session_state.carrinho_preco[i])
+
+    botao_remover = st.button("remover", help="remove o último item do carrinho")
 
     col1, col2, col3 = st.columns(3)
     preco_total = col1.metric("PREÇO TOTAL:", value=sum(st.session_state.carrinho_preco))
@@ -184,8 +185,10 @@ with carrinho:
     if pagar_tudo:
         st.write("você gastou dindin")
     if botao_remover:
-        st.session_state.carrinho_produto.pop[-1]
-        st.session_state.carrinho_preco.pop[-1]
+        if(len(st.session_state.carrinho_produto)!=0 and len(st.session_state.carrinho_preco)!=0):
+            removed_element = st.session_state.carrinho_produto.pop(-1)
+            removed_element = st.session_state.carrinho_preco.pop(-1)
+            col01.info("Recarregue a página para atualizar o carrinho")
 
 with st.sidebar:
     st.sidebar.title("PERFIL")
