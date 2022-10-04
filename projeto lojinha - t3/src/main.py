@@ -7,8 +7,6 @@ login, cadastro, loja, carrinho = st.tabs(["login", "cadastro", "loja", "carrinh
 
 payment = ["PayPal", "Boleto Bancario", "PIX", "Visa", "Mastercard", "Diner's Club"]
 
-SeusItens = ["eu"]
-SeusItens_preco = [10]
 X = False
 
 precos = [
@@ -29,10 +27,6 @@ produtos = [
     "PC gamer"
 ]
 
-# Usuario_nome = ["Luiz", "opa"]
-# Usuario_email = ["Luiz@gmail.com", "opa@opa"]
-# Usuario_senha = ["Luiz", "opa"]
-
 
 with cadastro:
     st.title("Preencha suas Informações:")
@@ -50,7 +44,6 @@ with cadastro:
 
 with login:
     st.title("**WELCOME TRAVELER**")
-
     with st.form(key="verify_user"):
         st.markdown("**INFO**")
         input_name = st.text_input(label="Username")
@@ -63,14 +56,6 @@ with login:
             X = True
         else:
             st.write("Incorrect username or password")
-
-        # if input_button_submit:
-        #     if uc.checkLogin(input_name, input_password, None):
-        #         st.write("Login successful!")
-        #     else:
-        #         st.write("Incorrect username or password")
-        # else:
-        #     st.write("Press to submit")
 
 with st.sidebar:
     st.sidebar.title("PERFIL")
