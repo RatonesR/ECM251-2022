@@ -3,12 +3,13 @@ from controllers.user_controller import UserController as uc
 
 st.set_page_config(page_title="Rat Store", page_icon=":mouse:", layout="centered", initial_sidebar_state="collapsed", menu_items=None)
 
-login, cadastro, loja, carrinho, teste = st.tabs(["login", "cadastro", "loja", "carrinho", "teste"])
+login, cadastro, loja, carrinho = st.tabs(["login", "cadastro", "loja", "carrinho"])
 
 payment = ["PayPal", "Boleto Bancario", "PIX", "Visa", "Mastercard", "Diner's Club"]
 
 SeusItens = ["eu"]
 SeusItens_preco = [10]
+X = False
 
 precos = [
     29.99,
@@ -32,35 +33,6 @@ produtos = [
 # Usuario_email = ["Luiz@gmail.com", "opa@opa"]
 # Usuario_senha = ["Luiz", "opa"]
 
-with st.sidebar:
-    st.sidebar.title("PERFIL")
-    col1, col2, col3 = st.columns(3)
-    with col2:
-        st.image("https://cdn-icons-png.flaticon.com/512/616/616569.png", caption="imagem de perfil", width=100)
-    st.write("Nome: ", st.session_state.chave[-1][0])
-    st.write("Email: ", st.session_state.chave[-1][1])
-    logout = st.button(label="logout")
-
-    if logout:
-        del(st.session_state.chave[0])
-        st.write("Logged out!")
-
-with login:
-    st.title("**WELCOME TRAVELER**")
-
-    with st.form(key="verify_user"):
-        st.markdown("**INFO**")
-        input_name = st.text_input(label="Username")
-        input_password = st.text_input(label="Password")
-        input_button_submit = st.form_submit_button("Login")
-
-        if input_button_submit:
-            if uc.checkLogin(input_name, input_password, None):
-                st.write("Login successful!")
-            else:
-                st.write("Incorrect username or password")
-        else:
-            st.write("Press to submit")
 
 with cadastro:
     st.title("Preencha suas Informações:")
@@ -76,8 +48,52 @@ with cadastro:
         st.session_state.chave.append([nome, email, senha])
         st.write("Cadastrado!")
 
+with login:
+    st.title("**WELCOME TRAVELER**")
+
+    with st.form(key="verify_user"):
+        st.markdown("**INFO**")
+        input_name = st.text_input(label="Username")
+        input_email = st.text_input(label="Email")
+        input_password = st.text_input(label="Password")
+        input_button_submit = st.form_submit_button("Login")
+
+        if [input_name, input_email, input_password] in st.session_state.chave:
+            st.write("login successful!")
+            X = True
+        else:
+            st.write("Incorrect username or password")
+
+        # if input_button_submit:
+        #     if uc.checkLogin(input_name, input_password, None):
+        #         st.write("Login successful!")
+        #     else:
+        #         st.write("Incorrect username or password")
+        # else:
+        #     st.write("Press to submit")
+
+with st.sidebar:
+    st.sidebar.title("PERFIL")
+    col01, col02, col03 = st.columns(3)
+    col1, col2, col3 = st.columns(3)
+    with col02:
+        st.image("https://cdn-icons-png.flaticon.com/512/616/616569.png", caption="imagem de perfil", width=100)
+    with col1:
+        st.write("Nome: ")
+        st.write("Email: ")
+    with col2:
+        if X == True:
+            st.write(input_name)
+            st.write(input_email)
+    logout = st.button(label="logout")
+    if logout:
+        del st.session_state.chave
+        st.info("Recarregue a página para atualizar")
+
 with loja:
-    st.selectbox("Buscar", options=("Aulão com Murilo",
+    st.title("BEM VINDO À NOSSA LOJA")
+
+    opcao = st.selectbox("Buscar", options=("Aulão com Murilo",
     "Correção de Trabalho",
     "Pokemon Scarlet",
     "Adiar o Projeto",
@@ -85,7 +101,16 @@ with loja:
     "PC gamer"
     ))
 
-    st.title("BEM VINDO À NOSSA LOJA")
+    if "carrinho_produto" not in st.session_state:
+        st.session_state.carrinho_produto = []
+    if "carrinho_preco" not in st.session_state:
+        st.session_state.carrinho_preco = []
+
+    add_cart = st.button("adicionar ao carrinho")
+
+    if add_cart:
+        st.session_state.carrinho_produto.append(opcao)
+        st.session_state.carrinho_preco.append(precos[produtos.index(opcao)])
 
     st.header("**EM ALTA**")
 
@@ -121,38 +146,26 @@ with loja:
 
 with carrinho:
     st.title("**SEUS ITENS**")
-    col1, col2 = st.columns(2)
-    for i in range(len(SeusItens)):
-        col1.write(SeusItens[i])
-        col2.write(SeusItens_preco[i])
-    botao_remover = st.button("remover ultimo item")
+    col01, col02 = st.columns(2)
+    for i in range(len(st.session_state.carrinho_produto)):
+        st.empty()
+        col01.write(st.session_state.carrinho_produto[i])
+        col02.write(st.session_state.carrinho_preco[i])
+
+    botao_remover = st.button("remover", help="remove o último item do carrinho")
+
+    col1, col2, col3 = st.columns(3)
+    preco_total = col1.metric("PREÇO TOTAL:", value=sum(st.session_state.carrinho_preco))
+    forma_pagamento = col2.selectbox("selecione forma de pagamento", options=("PayPal", "Boleto Bancário", "PIX", "Crédito", "Débito"))
+    pagar_tudo = st.button("pagar")
+    if pagar_tudo:
+        st.write("você gastou dindin")
+        st.session_state.carrinho_produto.clear()
+        st.session_state.carrinho_preco.clear()
+        st.info("Recarregue a página para atualizar")
     if botao_remover:
-        SeusItens.pop[-1]
-        SeusItens_preco.pop[-1]
+        if(len(st.session_state.carrinho_produto)!=0 and len(st.session_state.carrinho_preco)!=0):
+            removed_element = st.session_state.carrinho_produto.pop(-1)
+            removed_element = st.session_state.carrinho_preco.pop(-1)
+            st.info("Recarregue a página para atualizar")
 
-with teste:
-    st.write("oi")
-    #login
-
-    nome_login = st.text_input(label="username")
-    email_login = st.text_input(label="email")
-    senha_login = st.text_input(label="senha")
-    botao2 = st.button("Login")
-
-    if botao2:
-        for i in st.session_state.chave:
-            for j in st.session_state.chave:
-                if nome_login == st.session_state.chave and senha_login == st.session_state.chave:
-                    st.write("deu certo")
-
-    #carrinho
-    
-    col1, col2 = st.columns(2)
-    with col1:
-        for i in range(len(produtos)):
-            st.write(produtos[i])
-    with col2:
-        for i in range(len(produtos)):
-            st.write(precos[i])
-
-    remove = st.button("remove")
