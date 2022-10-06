@@ -69,9 +69,13 @@ with st.sidebar:
         if X == True:
             st.write(input_name)
             st.write(input_email)
+        else:
+            st.write("")
+            st.write("")
     logout = st.button(label="logout")
     if logout:
-        del st.session_state.chave
+        #del st.session_state.chave
+        X = False
         st.info("Recarregue a página para atualizar")
 
 with loja:
