@@ -2,11 +2,11 @@ import streamlit as st
 
 st.set_page_config(page_title="Rat Store", page_icon=":mouse:", layout="centered", initial_sidebar_state="collapsed", menu_items=None)
 
-login, cadastro, loja, carrinho, teste = st.tabs(["login", "cadastro", "loja", "carrinho", "teste"])
+login, cadastro, loja, carrinho = st.tabs(["login", "cadastro", "loja", "carrinho"])
 
 payment = ["PayPal", "Boleto Bancario", "PIX", "Visa", "Mastercard", "Diner's Club"]
 
-X = False
+estado_login = False
 
 precos = [
     29.99,
@@ -52,9 +52,14 @@ with login:
 
         if [input_name, input_email, input_password] in st.session_state.chave:
             st.write("login successful!")
-            X = True
+            estado_login = True
         else:
             st.write("Incorrect username or password")
+    
+    if input_button_submit:
+        st.session_state.carrinho_produto.clear()
+        st.session_state.carrinho_preco.clear()
+
 
 with st.sidebar:
     st.sidebar.title("PERFIL")
@@ -66,17 +71,12 @@ with st.sidebar:
         st.write("Nome: ")
         st.write("Email: ")
     with col2:
-        if X == True:
+        if estado_login == True:
             st.write(input_name)
             st.write(input_email)
         else:
             st.write("")
             st.write("")
-    logout = st.button(label="logout")
-    if logout:
-        #del st.session_state.chave
-        X = False
-        st.info("Recarregue a página para atualizar")
 
 with loja:
     st.title("BEM VINDO À NOSSA LOJA")
@@ -187,10 +187,3 @@ with carrinho:
             removed_element = st.session_state.carrinho_produto.pop(-1)
             removed_element = st.session_state.carrinho_preco.pop(-1)
             st.info("Recarregue a página para atualizar")
-
-with teste:
-    with st.expander("descrição"):
-        st.write("""
-        Uma aula particular com o ilustre Murilo Zanini sem julgamentos, 
-        a não ser que seja para aprender a commitar...
-        """)
