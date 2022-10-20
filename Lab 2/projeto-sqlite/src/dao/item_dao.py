@@ -26,6 +26,7 @@ class ItemDAO:
             resultados.append(Item(id=resultado[0], nome=resultado[1], preco=resultado[2]))
         self.cursor.close()
         return resultados
+
     def inserir_item(self, item):
         self.cursor = self.conn.cursor()
         self.cursor.execute("""
@@ -33,6 +34,8 @@ class ItemDAO:
             VELUES(?,?,?);
         """, (item.id, item.nome, item.preco))
         self.conn.commit()
+        self.cursor.close()
+
     def pegar_item(self, id):
         self.cursor = self.conn.cursor()
         self.cursor.execute(f"""
@@ -44,3 +47,18 @@ class ItemDAO:
             item = Item(id=resultado[0], nome=resultado[1], preco=resultado[2])
         self.cursor.close()
         return item
+
+    def atualizar_item(self, item):
+        try:
+            self.cursor = self.conn.cursor()
+            self.cursor.execute(f"""
+                UPDATE Itens SET
+                nome = '{item.nome}',
+                preco = {item.preco}
+                WHERE id = '{item.id}'
+            """)
+            self.conn.commit()
+            self.cursor.close()
+        except:
+            return False
+        return True
