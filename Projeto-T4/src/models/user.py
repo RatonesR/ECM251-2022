@@ -5,4 +5,4 @@ class User:
         self.email = email
         self.password = password
     def __str__(self) -> str:
-        return f'Item["id":{self.id}, "name":{self.name}, "email":{self.email}, "password":{self.password}]]'
+        return f'User["id":{self.id}, "name":{self.name}, "email":{self.email}, "password":{self.password}]]'
