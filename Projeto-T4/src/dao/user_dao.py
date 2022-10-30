@@ -17,16 +17,33 @@ class UserDAO:
     def _connect(self):
         self.conn = sqlite3.connect('./databases/sqlite.db')
 
-    def cadastrar(self, user):
-        self.cursor = self.conn.cursor()
-        self.cursor.execute("""
-            INSERT INTO User(name, email, password)
-            VALUES(?, ?, ?);
-        """,  (user.name, user.email, user.password))
-        self.conn.commit()
-        self.cursor.close()
+    # def cadastrar(self, name, email, password):
+    #     try:
+    #         self.cursor = self.conn.cursor()
+    #         self.cursor.execute(f"""
+    #             INSERT INTO User (name, email, password)
+    #             VALUES('{name}', '{email}', '{password}')
+    #         """)
+    #         self.conn.commit()
+    #         self.cursor.close()
+    #     except:
+    #         return False
+    #     return True
 
-    def pegarlogin(self, name, password):
+    def excluir_conta(self, name, email, password):
+        try:
+            self.cursor = self.conn.cursor()
+            self.cursor.execute(f"""
+                DELETE FROM User
+                WHERE name = '{name}' AND email = '{email}' AND password = '{password}'
+            """)
+            self.conn.commit()
+            self.cursor.close()
+        except:
+            return False
+        return True
+
+    def checklogin(self, name, password):
         self.cursor = self.conn.cursor()
         self.cursor.execute(f"""
             SELECT * FROM User
@@ -38,3 +55,12 @@ class UserDAO:
             usuario = User(id=resultado[0], name=resultado[1], email=resultado[2], password=resultado[3])
         self.cursor.close()
         return usuario
+
+    def cadastrar(self, user):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("""
+            INSERT INTO Itens (id, nome, preco)
+            VALUES(?,?,?);
+        """, (user.id, user.nome, user.preco))
+        self.conn.commit()
+        self.cursor.close()
