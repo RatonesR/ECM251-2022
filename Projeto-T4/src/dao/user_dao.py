@@ -17,32 +17,6 @@ class UserDAO:
     def _connect(self):
         self.conn = sqlite3.connect('./databases/sqlite.db')
 
-    # def cadastrar(self, name, email, password):
-    #     try:
-    #         self.cursor = self.conn.cursor()
-    #         self.cursor.execute(f"""
-    #             INSERT INTO User (name, email, password)
-    #             VALUES('{name}', '{email}', '{password}')
-    #         """)
-    #         self.conn.commit()
-    #         self.cursor.close()
-    #     except:
-    #         return False
-    #     return True
-
-    def excluir_conta(self, name, email, password):
-        try:
-            self.cursor = self.conn.cursor()
-            self.cursor.execute(f"""
-                DELETE FROM User
-                WHERE name = '{name}' AND email = '{email}' AND password = '{password}'
-            """)
-            self.conn.commit()
-            self.cursor.close()
-        except:
-            return False
-        return True
-
     def checklogin(self, name, password):
         self.cursor = self.conn.cursor()
         self.cursor.execute(f"""
@@ -59,8 +33,21 @@ class UserDAO:
     def cadastrar(self, user):
         self.cursor = self.conn.cursor()
         self.cursor.execute("""
-            INSERT INTO Itens (id, nome, preco)
+            INSERT INTO User (name, email, password)
             VALUES(?,?,?);
-        """, (user.id, user.nome, user.preco))
+        """, (user.name, user.email, user.password))
         self.conn.commit()
         self.cursor.close()
+
+    def excluir_conta(self, name, email, password):
+        try:
+            self.cursor = self.conn.cursor()
+            self.cursor.execute(f"""
+                DELETE FROM User
+                WHERE name = '{name}' AND email = '{email}' AND password = '{password}'
+            """)
+            self.conn.commit()
+            self.cursor.close()
+        except:
+            return False
+        return True

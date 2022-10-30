@@ -1,4 +1,3 @@
-from unicodedata import name
 from src.models.user import User
 from src.dao.user_dao import UserDAO
 
