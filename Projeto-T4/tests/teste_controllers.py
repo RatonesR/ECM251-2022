@@ -4,15 +4,24 @@ from src.dao.cart_dao import CartDAO
 from src.models.user import User
 
 
-# controller = CartController()
-# dao = CartDAO()
+controller = UserController()
+### VERIFICANDO CHECKUSER
+# print("vamos checar sua conta!")
+# name = input("digite seu nome:\n")
+# password = input("digite sua senha:\n")
+# checar = controller.checklogin(name, password)
+# if checar == None:
+#     print("usuario nao encontrado!")
+# else:
+#     print("SUCESSO!!!")
 
-# prod_id_teste = input("digite o id o produto: ")
-# user_id_teste = input("digite seu id: ")
-# cart_id_teste = input("digite o id do carrinho: ")
+### VERIFICANDO CADASTRAR
+print("vamos cadastrar sua conta!")
+name_teste = input("digite seu nome:\n")
+email_teste = input("digite seu email:\n")
+password_teste = input("digite sua senha:\n")
+usuario = User(id = None, name = name_teste, email = email_teste, password = password_teste)
+cadastro = controller.cadastrar(usuario)
+print(cadastro)
 
-# carrinho = controller.ver_carrinho(cart_id_teste)
-# produtos = controller.
-# if cart_id_teste in 
-#     adicionar = controller.add_item_carrinho()
-
+### VERIFICANDO EXCLUIR_CONTA
