@@ -36,11 +36,8 @@ class UserDAO:
             INSERT INTO User (name, email, password)
             VALUES(?,?,?);
         """, (user.name, user.email, user.password))
-        resultado = self.cursor.fetchone()
-        usuario = User(id=resultado[0], name=resultado[1], email=resultado[2], password=resultado[3])
         self.conn.commit()
         self.cursor.close()
-        return usuario
 
     def excluir_conta(self, name, email, password):
         self.cursor = self.conn.cursor()
@@ -52,4 +49,4 @@ class UserDAO:
         usuario = User(id=resultado[0], name=resultado[1], email=resultado[2], password=resultado[3])
         self.conn.commit()
         self.cursor.close()
-        return usuario
+        return 

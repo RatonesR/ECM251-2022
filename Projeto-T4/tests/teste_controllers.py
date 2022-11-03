@@ -20,8 +20,7 @@ print("vamos cadastrar sua conta!")
 name_teste = input("digite seu nome:\n")
 email_teste = input("digite seu email:\n")
 password_teste = input("digite sua senha:\n")
-usuario = User(id = None, name = name_teste, email = email_teste, password = password_teste)
-cadastro = controller.cadastrar(usuario)
-print(cadastro)
+usuario = User(name = name_teste, email = email_teste, password = password_teste)
+print(controller.cadastrar(usuario))
 
 ### VERIFICANDO EXCLUIR_CONTA

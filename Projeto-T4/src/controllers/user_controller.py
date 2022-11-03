@@ -9,9 +9,9 @@ class UserController:
         user = UserDAO.get_instance().checklogin(name, password)
         return user
 
-    def cadastrar(self, usuario) -> bool:
+    def cadastrar(self, user) -> bool:
         try:
-            UserDAO.get_instance().cadastrar(usuario)
+            UserDAO.get_instance().cadastrar(user)
         except:
             return False
         return True
