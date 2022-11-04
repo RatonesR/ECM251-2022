@@ -26,7 +26,7 @@ class UserDAO:
         usuario = None
         resultado = self.cursor.fetchone()
         if resultado != None:
-            usuario = User(id=resultado[0], name=resultado[1], email=resultado[2], password=resultado[3])
+            usuario = User(name=resultado[1], email=resultado[2], password=resultado[3])
         self.cursor.close()
         return usuario
 
@@ -45,8 +45,5 @@ class UserDAO:
             DELETE FROM User
             WHERE name = '{name}' AND email = '{email}' AND password = '{password}'
         """)
-        resultado = self.cursor.fetchone()
-        usuario = User(id=resultado[0], name=resultado[1], email=resultado[2], password=resultado[3])
         self.conn.commit()
         self.cursor.close()
-        return 

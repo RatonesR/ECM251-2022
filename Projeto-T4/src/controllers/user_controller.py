@@ -16,9 +16,9 @@ class UserController:
             return False
         return True
 
-    def excluir_conta(self, usuario) -> bool:
+    def excluir_conta(self, name, email, password) -> bool:
         try:
-            UserDAO.get_instance().excluir_conta(usuario)
+            UserDAO.get_instance().excluir_conta(name, email, password)
         except:
             return False
         return True

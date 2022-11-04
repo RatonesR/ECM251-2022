@@ -17,10 +17,11 @@ class CartDAO:
     def _connect(self):
         self.conn = sqlite3.connect('./databases/sqlite.db')
 
-    def get_all(self):
+    def get_all(self, user_id):
         self.cursor = self.conn.cursor()
-        self.cursor.execute("""
-            SELECT * FROM Cart;
+        self.cursor.execute(f"""
+            SELECT * FROM Cart
+            WHERE user_id = {user_id}
         """)
         resultados = []
         for resultado in self.cursor.fetchall():
