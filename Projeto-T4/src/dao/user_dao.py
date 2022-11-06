@@ -32,7 +32,7 @@ class UserDAO:
 
     def cadastrar(self, user):
         self.cursor = self.conn.cursor()
-        self.cursor.execute("""
+        self.cursor.execute(f"""
             INSERT INTO User (name, email, password)
             VALUES(?,?,?);
         """, (user.name, user.email, user.password))

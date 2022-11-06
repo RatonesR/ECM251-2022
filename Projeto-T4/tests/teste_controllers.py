@@ -6,21 +6,21 @@ from src.models.user import User
 
 controller = UserController()
 ### VERIFICANDO CHECKUSER
-# print("vamos checar sua conta!")
-# name = input("digite seu nome:\n")
-# password = input("digite sua senha:\n")
-# checar = controller.checklogin(name, password)
-# if checar == None:
-#     print("usuario nao encontrado!")
-# else:
-#     print("SUCESSO!!!")
+print("vamos checar sua conta!")
+name = input("digite seu nome:\n")
+password = input("digite sua senha:\n")
+checar = controller.checklogin(name, password)
+if checar == None:
+    print("usuario nao encontrado!")
+else:
+    print("SUCESSO!!!")
 
 ### VERIFICANDO CADASTRAR
 # print("vamos cadastrar sua conta!")
 # name_teste = input("digite seu nome:\n")
 # email_teste = input("digite seu email:\n")
 # password_teste = input("digite sua senha:\n")
-# usuario = User(name = name_teste, email = email_teste, password = password_teste)
+# usuario = controller.cadastrar(User(name = name_teste, email = email_teste, password = password_teste))
 # if usuario == True:
 #     print("USUARIO CADASTRADO!!!")
 # else:
