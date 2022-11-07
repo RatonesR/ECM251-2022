@@ -22,3 +22,7 @@ class UserController:
         except:
             return False
         return True
+
+    def pegar_id(self, name, password) -> User:
+        id = UserDAO.get_instance().pegar_id(name, password)
+        return id

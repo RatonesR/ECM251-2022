@@ -47,3 +47,20 @@ class UserDAO:
         """)
         self.conn.commit()
         self.cursor.close()
+
+    def pegar_id(self, name, password):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute(f"""
+            SELECT id FROM User
+            WHERE name = '{name}' AND password = '{password}';
+        """)
+        id = self.cursor.fetchone()
+        return id
+
+    def teste(self):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("""
+            ALTER TABLE Cart DROP COLUMN cart_id;
+        """)
+        self.conn.commit()
+        self.cursor.close()

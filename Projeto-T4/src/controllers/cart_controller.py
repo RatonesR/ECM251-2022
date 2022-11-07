@@ -9,8 +9,8 @@ class CartController:
     def total_compra(self) -> float:
         pass
 
-    def ver_carrinho(self, cart_id) -> list[Cart]:
-        return CartDAO.get_instance().ver_carrinho(cart_id)
+    def ver_carrinho(self, user_id) -> list[Cart]:
+        return CartDAO.get_instance().ver_carrinho(user_id)
 
     def del_item_carrinho(self, prod_id) -> bool:
         return CartDAO.get_instance().del_item_carrinho(prod_id)
