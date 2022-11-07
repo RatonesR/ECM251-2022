@@ -17,7 +17,7 @@ class CartDAO:
     def _connect(self):
         self.conn = sqlite3.connect('./databases/sqlite.db')
 
-    def ver_carrinho(self, user_id):
+    def pegar_carrinho(self, user_id):
         self.cursor = self.conn.cursor()
         self.cursor.execute(f"""
             SELECT * FROM Cart
@@ -29,20 +29,24 @@ class CartDAO:
         self.cursor.close()
         return resultados
 
+    def ver_carrinho(self, id):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute(f"""
+        SELECT * FROM Products
+            WHERE id = {id}
+        """)
+        resultados = []
+        for resultado in self.cursor.fetchall():
+            resultados.append(Cart(id=resultado[0], name=resultado[1], price=resultado[2], description=resultado[3]))
+        self.cursor.close()
+        return resultados
+
     def add_item_carrinho(self, cart):
         self.cursor = self.conn.cursor()
         self.cursor.execute(f"""
-            INSERT INTO Cart (
-                prod_id, 
-                user_id, 
-                cart_id, 
-            )
-            VALUES(
-                {cart.prod_id},
-                {cart.user_id},
-                {cart.cart_id},
-            );
-        """)
+            INSERT INTO User (prod_id, user_id)
+            VALUES(?,?);
+        """, (cart.prod_id, cart.user_id))
         self.conn.commit()
         self.cursor.close()
 
