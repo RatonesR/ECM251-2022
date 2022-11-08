@@ -55,12 +55,5 @@ class UserDAO:
             WHERE name = '{name}' AND password = '{password}';
         """)
         id = self.cursor.fetchone()[0]
-        return id
-
-    def teste(self):
-        self.cursor = self.conn.cursor()
-        self.cursor.execute("""
-            ALTER TABLE Cart DROP COLUMN cart_id;
-        """)
-        self.conn.commit()
         self.cursor.close()
+        return id

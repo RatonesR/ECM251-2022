@@ -32,7 +32,7 @@ class CartDAO:
     def ver_carrinho(self, id):
         self.cursor = self.conn.cursor()
         self.cursor.execute(f"""
-        SELECT * FROM Products
+            SELECT * FROM Products
             WHERE id = {id}
         """)
         resultados = []
@@ -40,6 +40,16 @@ class CartDAO:
             resultados.append(Cart(id=resultado[0], name=resultado[1], price=resultado[2], description=resultado[3]))
         self.cursor.close()
         return resultados
+
+    def pegar_id_prod(self, name):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute(f"""
+            SELECT id FROM Products
+            WHERE name = '{name}'
+        """)
+        id = self.cursor.fetchone()[0]
+        self.cursor.close()
+        return id
 
     def add_item_carrinho(self, cart):
         self.cursor = self.conn.cursor()
@@ -50,26 +60,26 @@ class CartDAO:
         self.conn.commit()
         self.cursor.close()
 
-    def del_item_carrinho(self, prod_id):
-        try:
-            self.cursor = self.conn.cursor()
-            self.cursor.execute(f"""
-                DELETE FROM Cart 
-                WHERE prod_id = '{prod_id}'
-            """)
-            self.conn.commit()
-            self.cursor.close()
-        except:
-            return False
-        return True
+    # def del_item_carrinho(self, prod_id):
+    #     try:
+    #         self.cursor = self.conn.cursor()
+    #         self.cursor.execute(f"""
+    #             DELETE FROM Cart 
+    #             WHERE prod_id = '{prod_id}'
+    #         """)
+    #         self.conn.commit()
+    #         self.cursor.close()
+    #     except:
+    #         return False
+    #     return True
 
-    def ver_produtos(self):
-        self.cursor = self.conn.cursor()
-        self.cursor.execute("""
-            SELECT * FROM Products;
-        """)
-        resultados = []
-        for resultado in self.cursor.fetchall():
-            resultados.append(Products(id=resultado[0], name=resultado[1], price=resultado[2], description=resultado[3]))
-        self.cursor.close()
-        return resultados
+    # def ver_produtos(self):
+    #     self.cursor = self.conn.cursor()
+    #     self.cursor.execute("""
+    #         SELECT * FROM Products;
+    #     """)
+    #     resultados = []
+    #     for resultado in self.cursor.fetchall():
+    #         resultados.append(Products(id=resultado[0], name=resultado[1], price=resultado[2], description=resultado[3]))
+    #     self.cursor.close()
+    #     return resultados
