@@ -54,7 +54,7 @@ class UserDAO:
             SELECT id FROM User
             WHERE name = '{name}' AND password = '{password}';
         """)
-        id = self.cursor.fetchone()
+        id = self.cursor.fetchone()[0]
         return id
 
     def teste(self):

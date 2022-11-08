@@ -18,7 +18,7 @@ else:
     id_user = uc.pegar_id(name, password)
     print(id_user)
 
-### VERIFICANDO CADASTRAR
+### VERIFICANDO CADASTRARa  
 # print("vamos cadastrar sua conta!")
 # name_teste = input("digite seu nome:\n")
 # email_teste = input("digite seu email:\n")
