@@ -13,11 +13,8 @@ class Application:
     def logar():
         pass
 
-    def cadastrar():
-        pass
-
-    def sair():
-        pass
+    def cadastrar(self, id_atual):
+        self.user_controller.cadastrar(id_atual)
 
     def excluir_conta():
         pass

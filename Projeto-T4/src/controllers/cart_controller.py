@@ -7,9 +7,6 @@ class CartController:
     def __init__(self) -> None:
         pass
 
-    def total_compra(self) -> float:
-        pass
-
     def ver_carrinho(self, id):
         return CartDAO.get_instance().ver_carrinho(id)
 
