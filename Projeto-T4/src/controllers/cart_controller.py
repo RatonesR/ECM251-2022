@@ -31,6 +31,13 @@ class CartController:
             return False
         return True
 
+    def limpar_carrinho(self, user_id) -> bool:
+        try:
+            CartDAO.get_instance().limpar_carrinho(user_id)
+        except:
+            return False
+        return True
+
     def ver_produtos(self):
         produtos = CartDAO.get_instance().ver_produtos()
         return produtos

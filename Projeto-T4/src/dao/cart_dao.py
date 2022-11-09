@@ -54,6 +54,15 @@ class CartDAO:
         self.conn.commit()
         self.cursor.close()
 
+    def limpar_carrinho(self, user_id):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute(f"""
+            DELETE FROM Cart 
+            WHERE user_id = '{user_id}'
+        """)
+        self.conn.commit()
+        self.cursor.close()
+
     def ver_produtos(self):
         self.cursor = self.conn.cursor()
         self.cursor.execute("""

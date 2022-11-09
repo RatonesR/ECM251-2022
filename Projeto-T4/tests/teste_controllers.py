@@ -72,6 +72,16 @@ else:
 # else:
 #     print("item removido!")
 
+### LIMPAR_CARRINHO
+# opcao = int(input("Deseja limpar seu carrinho?\n1 - sim\n2 - não\n"))
+# if opcao == 1:
+#     limpar = cc.limpar_carrinho(id_user)
+#     print("carrinho vazio!")
+# elif opcao == 2:
+#     print("OK :(")
+# else:
+#     print("opcao invalida")
+
 ### VER_CARRINHO
 # opcao = int(input("deseja ver carrinho?\n1 - sim\n2 - não\n"))
 # if opcao == 1:
