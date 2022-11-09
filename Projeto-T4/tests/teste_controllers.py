@@ -72,11 +72,14 @@ else:
 #     print("opcao invalida!")
 
 ###VERIFICANDO VER_PRODUTOS
-opcao = int(input("deseja ver os produtos da loja?\n1 - sim\n2 - não\n"))
-if opcao == 1:
-    for resultado in cc.ver_produtos():
-        print(resultado)
-elif opcao == 2:
-    print("OK :(")
-else:
-    print("opcao invalida")
+# opcao = int(input("deseja ver os produtos da loja?\n1 - sim\n2 - não\n"))
+# if opcao == 1:
+#     for resultado in range(len(cc.ver_produtos())):
+#         nome_produto = cc.ver_produtos()[resultado][1]
+#         preco_produto = cc.ver_produtos()[resultado][2]
+#         descricao_produto = cc.ver_produtos()[resultado][3]
+#         print(f"NOME: '{nome_produto}'    DESCRIÇÃO: '{descricao_produto}'\nPREÇO: {preco_produto}")
+# elif opcao == 2:
+#     print("OK :(")
+# else:
+#     print("opcao invalida")

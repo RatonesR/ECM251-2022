@@ -31,6 +31,6 @@ class CartController:
             return False
         return True
 
-    def ver_produtos(self) -> Products:
+    def ver_produtos(self):
         produtos = CartDAO.get_instance().ver_produtos()
         return produtos

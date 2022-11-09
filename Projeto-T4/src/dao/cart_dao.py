@@ -59,8 +59,5 @@ class CartDAO:
         self.cursor.execute("""
             SELECT * FROM Products;
         """)
-        resultados = []
-        for resultado in self.cursor.fetchall():
-            resultados.append(Products(id=resultado[0], name=resultado[1], price=resultado[2], description=resultado[3]))
-        self.cursor.close()
+        resultados = self.cursor.fetchall()
         return resultados
