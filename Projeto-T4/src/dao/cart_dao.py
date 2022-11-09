@@ -23,9 +23,7 @@ class CartDAO:
             SELECT * FROM Cart
             WHERE user_id = {user_id}
         """)
-        resultados = []
-        for resultado in self.cursor.fetchall():
-            resultados.append(Cart(prod_id=resultado[1], user_id=resultado[2]))
+        resultados = self.cursor.fetchall()
         self.cursor.close()
         return resultados
 
