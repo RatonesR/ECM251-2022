@@ -33,11 +33,13 @@ class CartDAO:
             SELECT * FROM Products
             WHERE id = {id}
         """)
-        resultados = []
-        for resultado in self.cursor.fetchall():
-            resultados.append(Products(id=resultado[0], name=resultado[1], price=resultado[2], description=resultado[3]))
-        self.cursor.close()
-        return resultados
+        item = self.cursor.fetchone()
+        return item
+        # resultados = []
+        # for resultado in self.cursor.fetchall():
+        #     resultados.append(Products(id=resultado[0], name=resultado[1], price=resultado[2], description=resultado[3]))
+        # self.cursor.close()
+        # return resultados
 
     def pegar_id_prod(self, name):
         self.cursor = self.conn.cursor()

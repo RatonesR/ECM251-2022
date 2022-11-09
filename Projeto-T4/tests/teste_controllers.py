@@ -64,7 +64,7 @@ produtos = []
 if opcao == 1:
     pegar_carrinho = cc.pegar_carrinho(id_user)
     for resultados in range(len(pegar_carrinho)):
-        print(cc.ver_carrinho(pegar_carrinho[resultados][1]))
+        print(cc.ver_carrinho(pegar_carrinho[resultados][1])[1:3])
 elif opcao == 2:
     print("OK :(")
 else:

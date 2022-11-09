@@ -13,7 +13,7 @@ class CartController:
     def pegar_carrinho(self, user_id) -> list[Cart]:
         return CartDAO.get_instance().pegar_carrinho(user_id)
 
-    def ver_carrinho(self, id) -> list[Products]:
+    def ver_carrinho(self, id) -> Products:
         return CartDAO.get_instance().ver_carrinho(id)
 
     def add_item_carrinho(self, cart) -> bool:
