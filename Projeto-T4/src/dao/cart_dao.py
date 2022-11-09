@@ -70,3 +70,12 @@ class CartDAO:
         """)
         resultados = self.cursor.fetchall()
         return resultados
+
+    def total_compra(self, id):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute(f"""
+            SELECT * FROM Cart INNER JOIN Products, User ON Cart.user_id = User.id AND Cart.prod_id = Products.id WHERE Cart.user_id = {id}
+        """)
+        resultados = self.cursor.fetchall()
+        self.cursor.close()
+        return resultados

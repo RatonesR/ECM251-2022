@@ -41,3 +41,6 @@ class CartController:
     def ver_produtos(self):
         produtos = CartDAO.get_instance().ver_produtos()
         return produtos
+
+    def total_compra(self, id):
+        return CartDAO.get_instance().total_compra(id)

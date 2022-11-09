@@ -93,6 +93,14 @@ else:
 # else:
 #     print("opcao invalida!")
 
+### TOTAL_COMPRA
+# precos = []
+# ver_carrinho = cc.ver_carrinho(id_user)
+# for resultado in ver_carrinho:
+#     precos.append(resultado[5])
+# total = sum(precos)
+# print("TOTAL DA COMPRA: R$ %.2f" % total)
+
 ### VER_PRODUTOS
 # opcao = int(input("deseja ver os produtos da loja?\n1 - sim\n2 - não\n"))
 # if opcao == 1:
