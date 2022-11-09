@@ -17,6 +17,7 @@ if checar == None:
 else:
     print("SUCESSO!!!")
     id_user = uc.pegar_id(name, password)
+    print(checar)
 
 ### PEGAR_NOME E PEGAR_EMAIL
 # print(f"SEU NOME É: {uc.pegar_nome(id_user)}")

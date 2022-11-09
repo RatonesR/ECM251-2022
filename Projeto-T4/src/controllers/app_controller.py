@@ -9,36 +9,12 @@ class Application:
     def __init__(self):
         self.user_controller = UserController()
         self.cart_controller = CartController()
+        self.carrinho = None
+        self.estado_login = False
 
-    def logar():
-        pass
+    def login(self, name, password):
+        return self.user_controller.checklogin(name, password)
 
-    def cadastrar(self, id_atual):
-        self.user_controller.cadastrar(id_atual)
-
-    def excluir_conta():
-        pass
-
-    def listar_produtos(self):
-        self.cart_controller.ver_produtos()
-
-    def ver_carrinho(self, id_atual):
-        retorno = {
-            "ITENS":[]
-        }
-        ver_carrinho = self.cart_controller.ver_carrinho(id_atual)
-        for resultado in ver_carrinho:
-            retorno["ITENS"].append({"nome": resultado[4], "preço": resultado[5]})
-        return retorno
-
-    def total_compra():
-        pass
-
-    def add_item_carrinho():
-        pass
-
-    def rem_item_carrinho():
-        pass
-
-    def limpar_carrinho():
-        pass
+    def pegar_user(self):
+        login = self.user_controller.checklogin()
+        return 
