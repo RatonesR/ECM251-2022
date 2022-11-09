@@ -22,7 +22,19 @@ class Application:
     def excluir_conta():
         pass
 
-    def listar_produtos():
+    def listar_produtos(self):
+        self.cart_controller.ver_produtos()
+
+    def ver_carrinho(self, id_atual):
+        retorno = {
+            "ITENS":[]
+        }
+        ver_carrinho = self.cart_controller.ver_carrinho(id_atual)
+        for resultado in ver_carrinho:
+            retorno["ITENS"].append({"nome": resultado[4], "preço": resultado[5]})
+        return retorno
+
+    def total_compra():
         pass
 
     def add_item_carrinho():
