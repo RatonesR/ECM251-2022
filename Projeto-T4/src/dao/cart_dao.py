@@ -17,24 +17,13 @@ class CartDAO:
     def _connect(self):
         self.conn = sqlite3.connect('./databases/sqlite.db')
 
-    def pegar_carrinho(self, user_id):
-        self.cursor = self.conn.cursor()
-        self.cursor.execute(f"""
-            SELECT * FROM Cart
-            WHERE user_id = {user_id}
-        """)
-        resultados = self.cursor.fetchall()
-        self.cursor.close()
-        return resultados
-
     def ver_carrinho(self, id):
         self.cursor = self.conn.cursor()
         self.cursor.execute(f"""
-            SELECT * FROM Products
-            WHERE id = {id}
+            SELECT * FROM Cart INNER JOIN Products, User ON Cart.user_id = User.id AND Cart.prod_id = Products.id WHERE Cart.user_id = {id}
         """)
-        item = self.cursor.fetchone()
-        return item
+        resultados = self.cursor.fetchall()
+        return resultados
         # resultados = []
         # for resultado in self.cursor.fetchall():
         #     resultados.append(Products(id=resultado[0], name=resultado[1], price=resultado[2], description=resultado[3]))

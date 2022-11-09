@@ -60,11 +60,10 @@ else:
 
 ###VERIFICANDO VER_CARRINHO
 opcao = int(input("deseja ver carrinho?\n1 - sim\n2 - não\n"))
-produtos = []
 if opcao == 1:
-    pegar_carrinho = cc.pegar_carrinho(id_user)
-    for resultados in range(len(pegar_carrinho)):
-        print(cc.ver_carrinho(pegar_carrinho[resultados][1])[1:3])
+    ver_carrinho = cc.ver_carrinho(id_user)
+    for resultado in ver_carrinho:
+        print(f'Nome: {resultado[4]} Preço: {resultado[5]}')
 elif opcao == 2:
     print("OK :(")
 else:

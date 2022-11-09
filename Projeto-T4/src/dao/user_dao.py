@@ -57,3 +57,15 @@ class UserDAO:
         id = self.cursor.fetchone()[0]
         self.cursor.close()
         return id
+
+    def editar_perfil(self, user):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute(f"""
+            UPDATE User SET
+            name = '{user.name}',
+            email = '{user.preco}',
+            password = '{user.password}'
+            WHERE id = '{user.id}'
+        """)
+        self.conn.commit()
+        self.cursor.close()

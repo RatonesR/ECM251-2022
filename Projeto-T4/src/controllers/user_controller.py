@@ -26,3 +26,10 @@ class UserController:
     def pegar_id(self, name, password) -> User:
         id = UserDAO.get_instance().pegar_id(name, password)
         return id
+
+    def editar_perfil(self, user) -> bool:
+        try:
+            UserDAO.get_instance().mudar_nome(user)
+        except:
+            return False
+        return True
