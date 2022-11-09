@@ -29,7 +29,7 @@ class UserController:
 
     def editar_perfil(self, user) -> bool:
         try:
-            UserDAO.get_instance().mudar_nome(user)
+            UserDAO.get_instance().editar_perfil(user)
         except:
             return False
         return True

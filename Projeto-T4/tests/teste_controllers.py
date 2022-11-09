@@ -3,10 +3,10 @@ from src.controllers.cart_controller import CartController
 from src.models.user import User
 from src.models.cart import Cart
 
-
 uc = UserController()
 cc = CartController()
 id_user = None
+
 ### VERIFICANDO CHECKUSER E PEGAR_ID
 print("vamos checar sua conta!")
 name = input("digite seu nome:\n")
@@ -18,13 +18,15 @@ else:
     print("SUCESSO!!!")
     id_user = uc.pegar_id(name, password)
 
-### VERIFICANDO CADASTRARa  
+### VERIFICANDO CADASTRAR 
 # print("vamos cadastrar sua conta!")
 # name_teste = input("digite seu nome:\n")
 # email_teste = input("digite seu email:\n")
 # password_teste = input("digite sua senha:\n")
-# usuario = uc.cadastrar(User(name = name_teste, email = email_teste, password = password_teste))
-# if usuario == True:
+# user = User(name = name_teste, email = email_teste, password = password_teste)
+# validar = user.validar_user()
+# if validar == True:
+#     usuario = uc.cadastrar(User(name = name_teste, email = email_teste, password = password_teste))
 #     print("USUARIO CADASTRADO!!!")
 # else:
 #     print("falha no cadastro!")
@@ -59,12 +61,22 @@ else:
 #     print("item removido!")
 
 ###VERIFICANDO VER_CARRINHO
-opcao = int(input("deseja ver carrinho?\n1 - sim\n2 - não\n"))
+# opcao = int(input("deseja ver carrinho?\n1 - sim\n2 - não\n"))
+# if opcao == 1:
+#     ver_carrinho = cc.ver_carrinho(id_user)
+#     for resultado in ver_carrinho:
+#         print(f'Nome: {resultado[4]} Preço: {resultado[5]}')
+# elif opcao == 2:
+#     print("OK :(")
+# else:
+#     print("opcao invalida!")
+
+###VERIFICANDO VER_PRODUTOS
+opcao = int(input("deseja ver os produtos da loja?\n1 - sim\n2 - não\n"))
 if opcao == 1:
-    ver_carrinho = cc.ver_carrinho(id_user)
-    for resultado in ver_carrinho:
-        print(f'Nome: {resultado[4]} Preço: {resultado[5]}')
+    for resultado in cc.ver_produtos():
+        print(resultado)
 elif opcao == 2:
     print("OK :(")
 else:
-    print("opcao invalida!")
+    print("opcao invalida")

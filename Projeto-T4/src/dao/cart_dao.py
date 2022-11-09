@@ -23,12 +23,8 @@ class CartDAO:
             SELECT * FROM Cart INNER JOIN Products, User ON Cart.user_id = User.id AND Cart.prod_id = Products.id WHERE Cart.user_id = {id}
         """)
         resultados = self.cursor.fetchall()
+        self.cursor.close()
         return resultados
-        # resultados = []
-        # for resultado in self.cursor.fetchall():
-        #     resultados.append(Products(id=resultado[0], name=resultado[1], price=resultado[2], description=resultado[3]))
-        # self.cursor.close()
-        # return resultados
 
     def pegar_id_prod(self, name):
         self.cursor = self.conn.cursor()
@@ -58,13 +54,13 @@ class CartDAO:
         self.conn.commit()
         self.cursor.close()
 
-    # def ver_produtos(self):
-    #     self.cursor = self.conn.cursor()
-    #     self.cursor.execute("""
-    #         SELECT * FROM Products;
-    #     """)
-    #     resultados = []
-    #     for resultado in self.cursor.fetchall():
-    #         resultados.append(Products(id=resultado[0], name=resultado[1], price=resultado[2], description=resultado[3]))
-    #     self.cursor.close()
-    #     return resultados
+    def ver_produtos(self):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("""
+            SELECT * FROM Products;
+        """)
+        resultados = []
+        for resultado in self.cursor.fetchall():
+            resultados.append(Products(id=resultado[0], name=resultado[1], price=resultado[2], description=resultado[3]))
+        self.cursor.close()
+        return resultados
