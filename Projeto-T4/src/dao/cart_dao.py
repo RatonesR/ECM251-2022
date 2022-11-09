@@ -25,7 +25,7 @@ class CartDAO:
         """)
         resultados = []
         for resultado in self.cursor.fetchall():
-            resultados.append(Cart(id=resultado[0], prod_id=resultado[1], user_id=resultado[2], cart_id=resultado[3]))
+            resultados.append(Cart(prod_id=resultado[1], user_id=resultado[2]))
         self.cursor.close()
         return resultados
 
@@ -37,7 +37,7 @@ class CartDAO:
         """)
         resultados = []
         for resultado in self.cursor.fetchall():
-            resultados.append(Cart(id=resultado[0], name=resultado[1], price=resultado[2], description=resultado[3]))
+            resultados.append(Products(id=resultado[0], name=resultado[1], price=resultado[2], description=resultado[3]))
         self.cursor.close()
         return resultados
 
@@ -54,24 +54,20 @@ class CartDAO:
     def add_item_carrinho(self, cart):
         self.cursor = self.conn.cursor()
         self.cursor.execute(f"""
-            INSERT INTO User (prod_id, user_id)
+            INSERT INTO Cart (prod_id, user_id)
             VALUES(?,?);
         """, (cart.prod_id, cart.user_id))
         self.conn.commit()
         self.cursor.close()
 
-    # def del_item_carrinho(self, prod_id):
-    #     try:
-    #         self.cursor = self.conn.cursor()
-    #         self.cursor.execute(f"""
-    #             DELETE FROM Cart 
-    #             WHERE prod_id = '{prod_id}'
-    #         """)
-    #         self.conn.commit()
-    #         self.cursor.close()
-    #     except:
-    #         return False
-    #     return True
+    def del_item_carrinho(self, prod_id, user_id):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute(f"""
+            DELETE FROM Cart 
+            WHERE prod_id = '{prod_id}' AND user_id = '{user_id}'
+        """)
+        self.conn.commit()
+        self.cursor.close()
 
     # def ver_produtos(self):
     #     self.cursor = self.conn.cursor()
