@@ -27,6 +27,14 @@ class UserController:
         id = UserDAO.get_instance().pegar_id(name, password)
         return id
 
+    def pegar_nome(self, id) -> User:
+        name = UserDAO.get_instance().pegar_nome(id)
+        return name
+    
+    def pegar_email(self, id) -> User:
+        email = UserDAO.get_instance().pegar_email(id)
+        return email
+
     def editar_perfil(self, name, email, password, id) -> bool:
         try:
             UserDAO.get_instance().editar_perfil(name, email, password, id)

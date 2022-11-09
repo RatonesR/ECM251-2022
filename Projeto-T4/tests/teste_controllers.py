@@ -18,6 +18,10 @@ else:
     print("SUCESSO!!!")
     id_user = uc.pegar_id(name, password)
 
+### PEGAR_NOME E PEGAR_EMAIL
+# print(f"SEU NOME É: {uc.pegar_nome(id_user)}")
+# print(f"SEU EMAIL É: {uc.pegar_email(id_user)}")
+
 ### CADASTRAR 
 # print("vamos cadastrar sua conta!")
 # name_teste = input("digite seu nome:\n")

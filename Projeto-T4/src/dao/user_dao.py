@@ -58,6 +58,26 @@ class UserDAO:
         self.cursor.close()
         return id
 
+    def pegar_nome(self, id):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute(f"""
+            SELECT name FROM User
+            WHERE id = '{id}';
+        """)
+        name = self.cursor.fetchone()[0]
+        self.cursor.close()
+        return name
+
+    def pegar_email(self, id):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute(f"""
+            SELECT email FROM User
+            WHERE id = '{id}';
+        """)
+        email = self.cursor.fetchone()[0]
+        self.cursor.close()
+        return email
+
     def editar_perfil(self, name, email, password, id):
         self.cursor = self.conn.cursor()
         self.cursor.execute(f"""
