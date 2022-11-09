@@ -7,7 +7,7 @@ uc = UserController()
 cc = CartController()
 id_user = None
 
-### VERIFICANDO CHECKUSER E PEGAR_ID
+### CHECKUSER E PEGAR_ID
 print("vamos checar sua conta!")
 name = input("digite seu nome:\n")
 password = input("digite sua senha:\n")
@@ -18,7 +18,7 @@ else:
     print("SUCESSO!!!")
     id_user = uc.pegar_id(name, password)
 
-### VERIFICANDO CADASTRAR 
+### CADASTRAR 
 # print("vamos cadastrar sua conta!")
 # name_teste = input("digite seu nome:\n")
 # email_teste = input("digite seu email:\n")
@@ -31,7 +31,15 @@ else:
 # else:
 #     print("falha no cadastro!")
 
-### VERIFICANDO EXCLUIR_CONTA
+### EDITAR_PERFIL
+# print("vamos editar seu perfil!")
+# new_name = input("digite seu novo username:")
+# new_email = input("digite seu novo email:")
+# new_password = input("digite sua nova senha:")
+# editar = uc.editar_perfil(new_name, new_email, new_password, id_user)
+# print("alterações salvas!")
+
+### EXCLUIR_CONTA
 # print("vamos excluir sua conta!")
 # name = input("digite seu nome:\n")
 # email = input("digite seu email:\n")
@@ -42,7 +50,7 @@ else:
 # else:
 #     print("usuario nao encontrado!")
 
-###VERIFICANDO PEGAR_ID_PROD E ADD_ITEM_CARRINHO
+### PEGAR_ID_PROD E ADD_ITEM_CARRINHO
 # nome_produto = input("digite o produto desejado:\n")
 # id_produto = cc.pegar_id_prod(nome_produto)
 # carrinho = cc.add_item_carrinho(Cart(prod_id = id_produto, user_id = id_user))
@@ -51,7 +59,7 @@ else:
 # else:
 #     print("produto adicionado!")
 
-###VERIFICANDO DEL_ITEM_CARRINHO
+### DEL_ITEM_CARRINHO
 # nome_produto = input("qual produto deseja remover?\n")
 # id_produto = cc.pegar_id_prod(nome_produto)
 # carrinho = cc.del_item_carrinho(id_produto, id_user)
@@ -60,7 +68,7 @@ else:
 # else:
 #     print("item removido!")
 
-###VERIFICANDO VER_CARRINHO
+### VER_CARRINHO
 # opcao = int(input("deseja ver carrinho?\n1 - sim\n2 - não\n"))
 # if opcao == 1:
 #     ver_carrinho = cc.ver_carrinho(id_user)
@@ -71,7 +79,7 @@ else:
 # else:
 #     print("opcao invalida!")
 
-###VERIFICANDO VER_PRODUTOS
+### VER_PRODUTOS
 # opcao = int(input("deseja ver os produtos da loja?\n1 - sim\n2 - não\n"))
 # if opcao == 1:
 #     for resultado in range(len(cc.ver_produtos())):
