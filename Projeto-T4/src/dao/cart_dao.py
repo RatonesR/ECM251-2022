@@ -15,7 +15,7 @@ class CartDAO:
         return cls._instance
 
     def _connect(self):
-        self.conn = sqlite3.connect('./databases/sqlite.db')
+        self.conn = sqlite3.connect('./databases/sqlite.db', check_same_thread=False)
 
     def ver_carrinho(self, id):
         self.cursor = self.conn.cursor()
