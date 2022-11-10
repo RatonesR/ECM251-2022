@@ -20,7 +20,6 @@ with col1:
     botao_login = st.button(label="Login")
 with col3:
     botao_cadastrar = st.button("Cadastrar", help="Ainda não possui uma conta na nossa loja? Cadastre-se aqui!")
-
 if botao_login:
     usuario = user_controller.checklogin(name, password)
     st.write(usuario)
