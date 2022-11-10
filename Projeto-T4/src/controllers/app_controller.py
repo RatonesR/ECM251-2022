@@ -12,9 +12,17 @@ class Application:
         self.carrinho = None
         self.estado_login = False
 
+    def login2(self, name, email, password):
+        self.usuario_logado = User(
+            id=None,
+            name=name,
+            email=email,
+            password=password
+        )
+
     def login(self, name, password):
         return self.user_controller.checklogin(name, password)
 
-    def pegar_user(self):
-        login = self.user_controller.checklogin()
-        return 
+    # def pegar_user(self):
+    #     login = self.user_controller.checklogin()
+    #     return 
