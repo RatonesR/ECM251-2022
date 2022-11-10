@@ -17,6 +17,5 @@ with st.form(key="verify_user"):
 
     if estado_login != None:
         st.write("login successful!")
-        st.write(estado_login)
     else:
         st.write("Incorrect username or password")
