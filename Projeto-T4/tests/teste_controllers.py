@@ -58,6 +58,7 @@ id_user = None
 ### PEGAR_ID_PROD E ADD_ITEM_CARRINHO
 # nome_produto = input("digite o produto desejado:\n")
 # id_produto = cc.pegar_id_prod(nome_produto)
+# print(id_produto)
 # carrinho = cc.add_item_carrinho(Cart(prod_id = id_produto, user_id = id_user))
 # if carrinho == False:
 #     print("produto não encontrado!")
@@ -86,9 +87,9 @@ id_user = None
 ### VER_CARRINHO
 # opcao = int(input("deseja ver carrinho?\n1 - sim\n2 - não\n"))
 # if opcao == 1:
-#     ver_carrinho = cc.ver_carrinho(id_user)
-#     for resultado in ver_carrinho:
-#         print(f'Nome: {resultado[4]} Preço: {resultado[5]}')
+    # ver_carrinho = cc.ver_carrinho(id_user)
+    # for resultado in ver_carrinho:
+    #     print(f'Nome: {resultado[4]} Preço: {resultado[5]}')
 # elif opcao == 2:
 #     print("OK :(")
 # else:
@@ -105,11 +106,11 @@ id_user = None
 ### VER_PRODUTOS
 # opcao = int(input("deseja ver os produtos da loja?\n1 - sim\n2 - não\n"))
 # if opcao == 1:
-#     for resultado in range(len(cc.ver_produtos())):
-#         nome_produto = cc.ver_produtos()[resultado][1]
-#         preco_produto = cc.ver_produtos()[resultado][2]
-#         descricao_produto = cc.ver_produtos()[resultado][3]
-#         print(f"NOME: '{nome_produto}'    DESCRIÇÃO: '{descricao_produto}'\nPREÇO: {preco_produto}")
+    # for resultado in range(len(cc.ver_produtos())):
+    #     nome_produto = cc.ver_produtos()[resultado][1]
+    #     preco_produto = cc.ver_produtos()[resultado][2]
+    #     descricao_produto = cc.ver_produtos()[resultado][3]
+    #     print(f"NOME: '{nome_produto}'    DESCRIÇÃO: '{descricao_produto}'\nPREÇO: {preco_produto}")
 # elif opcao == 2:
 #     print("OK :(")
 # else:

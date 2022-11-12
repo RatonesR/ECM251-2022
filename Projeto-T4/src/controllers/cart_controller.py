@@ -18,7 +18,10 @@ class CartController:
         return True
 
     def pegar_id_prod(self, name) -> Products:
-        id_prod = CartDAO.get_instance().pegar_id_prod(name)
+        try:
+            id_prod = CartDAO.get_instance().pegar_id_prod(name)
+        except:
+            return None
         return id_prod
 
     def del_item_carrinho(self, prod_id, user_id) -> bool:
