@@ -16,9 +16,9 @@ class UserController:
             return False
         return True
 
-    def excluir_conta(self, name, email, password) -> bool:
+    def excluir_conta(self, id) -> bool:
         try:
-            UserDAO.get_instance().excluir_conta(name, email, password)
+            UserDAO.get_instance().excluir_conta(id)
         except:
             return False
         return True
@@ -36,7 +36,7 @@ class UserController:
         return email
 
     def pegar_senha(self, id) -> User:
-        password = UserDAO.get_instance().pegar_email(id)
+        password = UserDAO.get_instance().pegar_senha(id)
         return password
 
     def editar_perfil(self, name, email, password, id) -> bool:

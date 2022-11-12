@@ -39,11 +39,11 @@ class UserDAO:
         self.conn.commit()
         self.cursor.close()
 
-    def excluir_conta(self, name, email, password):
+    def excluir_conta(self, id):
         self.cursor = self.conn.cursor()
         self.cursor.execute(f"""
             DELETE FROM User
-            WHERE name = '{name}' AND email = '{email}' AND password = '{password}'
+            WHERE id = '{id}'
         """)
         self.conn.commit()
         self.cursor.close()
