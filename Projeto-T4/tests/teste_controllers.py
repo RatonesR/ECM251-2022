@@ -115,3 +115,10 @@ id_user = None
 #     print("OK :(")
 # else:
 #     print("opcao invalida")
+
+### VER_PRODUTO
+# prod = input("digite o nome do produto\n")
+# id_prod = cc.pegar_id_prod(prod)
+# if id_prod != None:
+#     produto = cc.ver_produto(id_prod)
+#     print(produto[1])

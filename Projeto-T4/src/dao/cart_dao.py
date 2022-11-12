@@ -36,6 +36,16 @@ class CartDAO:
         self.cursor.close()
         return id
 
+    def ver_produto(self, id):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute(f"""
+            SELECT * FROM Products
+            WHERE id = '{id}'
+        """)
+        produto = self.cursor.fetchone()
+        self.cursor.close()
+        return produto
+
     def add_item_carrinho(self, cart):
         self.cursor = self.conn.cursor()
         self.cursor.execute(f"""

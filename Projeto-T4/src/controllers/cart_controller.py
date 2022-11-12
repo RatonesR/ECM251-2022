@@ -24,6 +24,10 @@ class CartController:
             return None
         return id_prod
 
+    def ver_produto(self, id):
+        produto = CartDAO.get_instance().ver_produto(id)
+        return produto
+
     def del_item_carrinho(self, prod_id, user_id) -> bool:
         try:
             CartDAO.get_instance().del_item_carrinho(prod_id, user_id)
